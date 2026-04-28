@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kru Pai Classroom — At the Café Dialogue Builder FULL PRO Smart Audio Hint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700;900&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#08111f;
+      --panel:#111c2f;
+      --ink:#eaf4ff;
+      --muted:#9fb3c8;
+      --line:rgba(180,210,255,.20);
+      --accent:#7dd3fc;
+      --patient:#f9a8d4;
+      --doctor:#7dd3fc;
+      --reception:#a7f3d0;
+      --gold:#fbbf24;
+      --ok:#22c55e;
+      --bad:#ef4444;
+      --shadow:0 18px 50px rgba(0,0,0,.38);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%}
+    body{
+      font-family:"Noto Sans Thai","Inter",system-ui,-apple-system,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(125,211,252,.20), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(249,168,212,.18), transparent 24%),
+        radial-gradient(circle at 48% 100%, rgba(167,243,208,.13), transparent 28%),
+        linear-gradient(180deg,#08111f,#101827 46%,#141827);
+      overflow:hidden;
+    }
+    .header{
+      position:sticky;top:0;z-index:60;
+      background:rgba(8,17,31,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+      box-shadow:0 10px 26px rgba(0,0,0,.25);
+    }
+    .headerInner{
+      max-width:1450px;margin:auto;padding:12px 16px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    }
+    .brandWrap{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:52px;height:52px;border-radius:17px;display:grid;place-items:center;
+      background:linear-gradient(135deg,#7dd3fc,#a7f3d0,#f9a8d4);
+      color:#062033;font-weight:900;letter-spacing:.5px;
+      box-shadow:0 0 0 1px rgba(255,255,255,.14),0 14px 30px rgba(125,211,252,.20);
+    }
+    .brand{font-size:clamp(18px,2.2vw,28px);font-weight:900}
+    .sub{font-size:12px;color:var(--muted);font-weight:800}
+    .wrap{max-width:1450px;margin:0 auto;padding:16px}
+    .card{
+      background:linear-gradient(180deg,rgba(18,31,53,.96),rgba(9,18,34,.98));
+      border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);
+    }
+    .hide{display:none!important}
+    .center{text-align:center}
+    .bigtitle{font-size:clamp(30px,4.5vw,54px);font-weight:900;line-height:1.08}
+    .tagline{font-size:clamp(16px,2vw,21px);line-height:1.7;color:#c7dcf3;font-weight:800}
+    .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center}
+    .btn{
+      border:none;cursor:pointer;border-radius:16px;padding:12px 16px;
+      font-weight:900;font-size:15px;color:#061120;
+      background:linear-gradient(180deg,#e0f2fe,#7dd3fc);
+      box-shadow:0 12px 0 rgba(14,116,144,.42),0 18px 30px rgba(125,211,252,.15);
+      transition:.15s transform,.15s filter;
+    }
+    .btn:hover{transform:translateY(-2px);filter:saturate(1.08)}
+    .btn:active{transform:translateY(2px)}
+    .btn.ghost{
+      color:var(--ink);background:#0e1728;border:1px solid var(--line);
+      box-shadow:0 10px 0 rgba(15,23,42,.55),0 18px 30px rgba(0,0,0,.16);
+    }
+    .btn.gold{
+      color:#422900;background:linear-gradient(180deg,#fde68a,var(--gold));
+      box-shadow:0 10px 0 rgba(180,83,9,.42),0 18px 30px rgba(245,158,11,.18);
+    }
+    .btn.pink{
+      color:#4a1029;background:linear-gradient(180deg,#fce7f3,#f9a8d4);
+      box-shadow:0 10px 0 rgba(190,24,93,.32),0 18px 30px rgba(249,168,212,.15);
+    }
+    .inputBox{
+      width:min(620px,100%);margin:auto;display:flex;gap:10px;align-items:center;
+      padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid var(--line)
+    }
+    .inputBox input{flex:1;border:none;outline:none;background:transparent;font-size:18px;color:var(--ink)}
+
+    .gameShell{
+      display:grid;grid-template-columns:420px minmax(0,1fr);gap:16px;
+      height:calc(100vh - 106px);
+    }
+    .leftPane{display:flex;flex-direction:column;gap:12px;min-height:0}
+    .wordCard{display:flex;flex-direction:column;min-height:0;padding:16px}
+    .panelTitle{font-size:20px;font-weight:900;margin-bottom:8px}
+    .panelSub{color:var(--muted);font-weight:800;line-height:1.65}
+    .bankScroller{overflow:auto;min-height:0;padding-right:4px;margin-top:12px}
+    .wordBank{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+    .groupBlock{width:100%;margin-bottom:12px}
+    .groupTitle{font-weight:900;margin:8px 0 10px;color:#a7f3d0;font-size:15px;letter-spacing:.2px}
+    .groupRow{display:flex;flex-wrap:wrap;gap:8px}
+    .wordBtn{
+      position:relative;border:none;cursor:pointer;border-radius:999px;padding:10px 16px;
+      background:rgba(255,255,255,.08);color:var(--ink);font-weight:900;font-size:16px;
+      border:1px solid rgba(125,211,252,.30);
+      box-shadow:0 10px 18px rgba(0,0,0,.18);
+      transition:.14s transform,.14s box-shadow,.14s border-color,.14s background;
+      user-select:none;
+    }
+    .wordBtn:hover{transform:translateY(-2px);border-color:rgba(125,211,252,.7);background:rgba(255,255,255,.14)}
+    .wordBtn.used{
+      background:linear-gradient(180deg,#ef4444,#b91c1c)!important;color:#fff!important;
+      border-color:rgba(255,255,255,.18)!important;box-shadow:0 10px 22px rgba(185,28,28,.24)!important;
+    }
+    .wordBtn.flash{animation:flashSelect .45s ease}
+    .wordBtn.looked{border-color:rgba(250,204,21,.65)}
+    @keyframes flashSelect{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+
+    .legend{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .miniPanel{padding:12px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+    .miniPanel b{display:block;margin-bottom:6px;font-size:14px}
+
+    .storyCard{padding:16px;display:flex;flex-direction:column;min-height:0}
+    .storyTools{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .scoreMini{font-weight:900;color:var(--muted);font-size:14px}
+    .hintBox,.statsBox{
+      padding:14px;border:1px solid var(--line);background:rgba(255,255,255,.045);
+      border-radius:16px;font-weight:800;line-height:1.75;margin-bottom:12px;display:none;color:#dbeafe
+    }
+    .storyScroller{overflow:auto;min-height:0;padding-right:5px}
+    .storyText{display:grid;gap:14px}
+    .dialogueLine{
+      border:1px solid rgba(180,210,255,.18);
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      border-radius:20px;
+      padding:14px;
+      transition:.18s border-color,.18s background,.18s box-shadow;
+      position:relative;
+      overflow:hidden;
+    }
+    .dialogueLine::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:7px;background:#7dd3fc;opacity:.85;
+    }
+    .dialogueLine.patientLine::before{background:var(--patient)}
+    .dialogueLine.customerLine::before{background:#f9a8d4}
+    .dialogueLine.baristaLine::before{background:#93c5fd}
+    .dialogueLine.doctorLine::before{background:var(--doctor)}
+    .dialogueLine.receptionistLine::before{background:var(--reception)}
+    .dialogueLine.activeLine{
+      border-color:rgba(251,191,36,.55);
+      background:linear-gradient(180deg,rgba(251,191,36,.09),rgba(255,255,255,.035));
+      box-shadow:0 0 0 4px rgba(251,191,36,.08);
+    }
+    .lineTop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-left:3px}
+    .thaiBox{
+      max-height:94px;
+      overflow-y:auto;
+      padding:10px 12px;
+      border-radius:15px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fde68a;
+      font-size:clamp(16px,1.7vw,22px);
+      font-weight:900;
+      line-height:1.7;
+      margin:8px 0 10px 3px;
+    }
+    .thaiLabel{font-size:12px;color:#a7f3d0;font-weight:900;letter-spacing:.2px}
+    .engLine{
+      font-size:clamp(18px,2vw,26px);
+      line-height:2.05;
+      font-weight:900;
+      color:#eef7ff;
+      margin-left:3px;
+    }
+    .speaker{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:5px 10px;margin-right:7px;border-radius:999px;
+      font-size:14px;font-weight:900;background:rgba(125,211,252,.14);
+      border:1px solid rgba(125,211,252,.28);
+      color:#bae6fd;
+    }
+    .speaker.patient{background:rgba(249,168,212,.14);border-color:rgba(249,168,212,.32);color:#fbcfe8}
+    .speaker.customer{background:rgba(249,168,212,.14);border-color:rgba(249,168,212,.32);color:#fbcfe8}
+    .speaker.barista{background:rgba(147,197,253,.14);border-color:rgba(147,197,253,.32);color:#dbeafe}
+    .speaker.doctor{background:rgba(125,211,252,.14);border-color:rgba(125,211,252,.32);color:#bae6fd}
+    .speaker.receptionist{background:rgba(167,243,208,.12);border-color:rgba(167,243,208,.30);color:#bbf7d0}
+    .fullSentence{
+      display:none;
+      margin:10px 0 0 3px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(251,191,36,.34);
+      background:rgba(251,191,36,.10);
+      color:#fff7cc;
+      font-weight:900;
+      line-height:1.65;
+    }
+    .fullSentence.show{display:block}
+    .mistakeBadge{
+      display:none;margin-left:3px;margin-top:8px;
+      color:#fecaca;font-weight:900;font-size:13px;
+    }
+    .mistakeBadge.show{display:block}
+    .blank{
+      display:inline-flex;align-items:center;gap:8px;vertical-align:middle;
+      min-width:94px;min-height:54px;padding:8px 12px;margin:0 3px;
+      background:#0d1728;border:2px dashed rgba(125,211,252,.55);border-radius:14px;
+      box-shadow:0 8px 18px rgba(0,0,0,.22);cursor:pointer;transition:.14s transform,.14s border-color,.14s box-shadow,.14s background;
+    }
+    .blank:hover{transform:translateY(-1px)}
+    .blank.active{border-color:var(--gold);background:rgba(251,191,36,.10);box-shadow:0 0 0 4px rgba(251,191,36,.13),0 12px 24px rgba(0,0,0,.24)}
+    .blank.correct{border-style:solid;border-color:rgba(34,197,94,.68);background:rgba(34,197,94,.12)}
+    .blank.wrong{border-style:solid;border-color:rgba(239,68,68,.72);background:rgba(239,68,68,.12)}
+    .blank.groupGlow{
+      animation:groupGlowPulse .7s ease;
+      box-shadow:0 0 0 4px rgba(250,204,21,.20),0 0 22px rgba(250,204,21,.42),0 10px 22px rgba(0,0,0,.24);
+      border-color:#fde68a!important;
+      background:rgba(250,204,21,.12)!important;
+    }
+    @keyframes groupGlowPulse{
+      0%{transform:scale(1);box-shadow:0 0 0 0 rgba(250,204,21,0)}
+      40%{transform:scale(1.035);box-shadow:0 0 0 6px rgba(250,204,21,.18),0 0 28px rgba(250,204,21,.46)}
+      100%{transform:scale(1);box-shadow:0 0 0 4px rgba(250,204,21,.20),0 0 22px rgba(250,204,21,.42)}
+    }
+    .blankNum{font-size:11px;color:var(--muted);font-weight:900;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.06)}
+    .tokenWrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+    .miniToken{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(125,211,252,.14);border:1px solid rgba(125,211,252,.30);font-size:14px;font-weight:900}
+    .placeholder{color:#6b7f96;font-weight:800}
+    .blankMark{font-size:18px;font-weight:900}
+    .blank.correct .blankMark{color:var(--ok)}
+    .blank.wrong .blankMark{color:var(--bad)}
+
+    .reviewList{display:grid;gap:10px;margin-top:14px}
+    .reviewItem{padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+    .reviewTop{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+    .pill{padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);font-size:12px;font-weight:900}
+    .resultHero{margin-top:14px;padding:18px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(125,211,252,.11),rgba(255,255,255,.03));text-align:center}
+    .bigScore{font-size:clamp(28px,4vw,48px);font-weight:900}
+    .certificate{
+      margin-top:14px;
+      padding:18px;
+      border-radius:20px;
+      border:1px solid rgba(251,191,36,.35);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(251,191,36,.14), transparent 30%),
+        linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+      display:none;
+    }
+    .certificate.show{display:block}
+    .certTitle{font-size:clamp(24px,3vw,40px);font-weight:900;text-align:center;color:#fde68a}
+    .certGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+    .certBox{padding:12px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid var(--line);text-align:center;font-weight:900}
+    .certBox span{display:block;color:#a7f3d0;font-size:12px;margin-bottom:5px}
+    .small{margin-top:7px;color:#c7dcf3;font-weight:800;line-height:1.65}
+
+    .flyingToken{position:fixed;left:0;top:0;z-index:200;pointer-events:none;padding:10px 14px;border-radius:999px;background:#0f172a;border:1px solid rgba(125,211,252,.45);box-shadow:0 10px 18px rgba(0,0,0,.22);font-weight:900;color:var(--ink);transform:translate(var(--sx),var(--sy)) scale(1);animation:flyTo .58s cubic-bezier(.2,.8,.2,1) forwards}
+    @keyframes flyTo{0%{transform:translate(var(--sx),var(--sy)) scale(1);opacity:1}70%{opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.82);opacity:0}}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:220;padding:12px 16px;border-radius:16px;background:#000;color:#fff;font-weight:900;box-shadow:0 16px 26px rgba(0,0,0,.34);opacity:0;pointer-events:none;transition:.22s}
+    .toast.show{opacity:1;bottom:34px}
+    .modalBack{position:fixed;inset:0;background:rgba(2,6,23,.70);display:none;align-items:center;justify-content:center;z-index:250;padding:16px}
+    .modal{width:min(560px,100%);background:linear-gradient(180deg,#14223a,#0f172a);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+    .modalHead{padding:16px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.04)}
+    .modalTitle{font-weight:900;font-size:22px}
+    .modalSub{margin-top:6px;color:var(--muted);font-weight:800;line-height:1.6}
+    .modalBody{padding:18px;line-height:1.85;color:#e8f2ff;font-weight:800}
+    .modalFoot{padding:14px 18px;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+    .stickerFloat{position:fixed;right:18px;bottom:18px;z-index:20;pointer-events:none;display:flex;gap:8px;font-size:28px;opacity:.9;filter:drop-shadow(0 8px 18px rgba(0,0,0,.25));}
+
+    @media (max-width:980px){
+      body{overflow:auto}
+      .gameShell{grid-template-columns:1fr;height:auto}
+      .wordCard{position:sticky;top:84px;z-index:40;max-height:43vh;margin-bottom:12px}
+      .legend{grid-template-columns:repeat(2,1fr)}
+      .storyCard{min-height:52vh}
+      .certGrid{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .wrap{padding:12px}
+      .headerInner{padding:10px 12px}
+      .logo{width:45px;height:45px}
+      .wordCard{top:74px;max-height:41vh}
+      .wordBtn{font-size:15px;padding:10px 13px}
+      .blank{min-width:82px;min-height:52px}
+      .engLine{line-height:2}
+      .legend{grid-template-columns:1fr 1fr}
+      .thaiBox{max-height:82px}
+    }
+    @media print{
+      body{background:#fff!important;color:#111!important;overflow:visible!important}
+      .header,.leftPane,.storyTools,.toast,.modalBack,.stickerFloat,.wordCard,.legend,.hintBox{display:none!important}
+      .wrap{max-width:100%;padding:0}
+      .gameShell{display:block;height:auto}
+      .storyCard,.card{box-shadow:none!important;border:none!important;background:#fff!important;color:#111!important}
+      .storyScroller{overflow:visible}
+      #storyText{display:none}
+      #statsBox{display:block!important;color:#111!important;border:1px solid #ddd!important;background:#fff!important}
+      #resultBox{display:block!important}
+      .resultHero,.certificate,.reviewItem{background:#fff!important;color:#111!important;border:1px solid #ddd!important}
+      .certTitle{color:#111!important}
+      .small{color:#111!important}
+      .row{display:none!important}
+    }
+  </style>
+</head>
+<body class="tv-mode">
+  <div class="header">
+    <div class="headerInner">
+      <div class="brandWrap">
+        <div class="logo">KP</div>
+        <div>
+          <div class="brand">Kru Pai Classroom — At the Café FULL PRO</div>
+          <div class="sub">Smart Audio Hint Score • Word Order • Café Dialogue • Pass/Perfect • PDF Report</div>
+        </div>
+      </div>
+      <div class="sub">ฝึกแต่งบทสนทนาคาเฟ่จากโจทย์ไทย ☕🎧✨</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="screenLogin" class="card" style="padding:24px;display:grid;gap:14px;justify-items:center;text-align:center;">
+      <div class="bigtitle">MISSION: At the Café ☕</div>
+      <div class="tagline" style="font-size:28px;line-height:1">🧋 ☕ 🍰 💳 ✨</div>
+      <div class="tagline" style="max-width:980px">
+        อ่านโจทย์ภาษาไทย แล้วเลือกคำศัพท์ไปเติมเป็นบทสนทนาภาษาอังกฤษให้สมบูรณ์  
+        ฝึกบทสนทนาคาเฟ่แบบใช้งานจริง มีสมาชิก โปรโมชั่น สะสมแต้ม ออเดอร์ จ่ายเงิน และฝึกลำดับคำ เช่น ice + latte
+      </div>
+
+      <div class="card" style="padding:16px;width:min(980px,100%);background:rgba(255,255,255,.045)">
+        <div class="panelTitle center">🎮 วิธีเล่น</div>
+        <div class="tagline" style="text-align:left;font-size:16px">
+          1) อ่านโจทย์ภาษาไทยในแต่ละบรรทัด หากข้อความยาวสามารถเลื่อนในกล่องภาษาไทยได้<br>
+          2) คลิกช่องว่างที่ต้องการเติม แล้วเลือกคำจาก Word Bank<br>
+          3) ปุ่มฟังเสียงเป็นตัวช่วยได้ตั้งแต่แรก ถ้าไม่ใช้เสียงแล้วตอบถูกจะได้ 2 คะแนน/คำ<br>
+          4) ถ้าเลือกคำที่อยู่หมวดถูกทาง ช่องจะเรืองแสงสีทอง ✨<br>
+          5) ฟังเสียงแล้วตอบถูกได้ 1 คะแนน/คำ ไม่ฟังเสียงแล้วตอบถูกได้ 2 คะแนน/คำ<br>
+          6) คะแนนเต็ม 84 คะแนน: ไม่ใช้เสียงและถูก = 2 คะแนน/คำ, ใช้เสียงและถูก = 1 คะแนน/คำ
+        </div>
+      </div>
+
+      <div class="inputBox">
+        <span style="font-weight:900">ชื่อเล่น:</span>
+        <input id="playerName" placeholder="เช่น Emma / Kru Pai / Aladin">
+      </div>
+      <div class="row">
+        <button class="btn" onclick="startGame()">เริ่มภารกิจ ▶</button>
+      </div>
+    </section>
+
+    <section id="screenGame" class="hide">
+      <div class="gameShell">
+        <aside class="leftPane">
+          <div class="card wordCard">
+            <div class="panelTitle">🧩 Word Bank</div>
+            <div class="panelSub">เลือกคำเติมบทสนทนา • คลิกขวาหรือกดค้างเพื่อดูความหมาย</div>
+            <div class="bankScroller">
+              <div id="wordBank" class="wordBank"></div>
+            </div>
+          </div>
+
+          <div class="legend">
+            <div class="miniPanel"><b>ผู้เล่น</b><span id="who">-</span></div>
+            <div class="miniPanel"><b>เติมแล้ว</b><span id="fillCount">0/42 ช่อง</span></div>
+            <div class="miniPanel"><b>ช่องที่เลือก</b><span id="activeInfo">ยังไม่ได้เลือก</span></div>
+            <div class="miniPanel"><b>เปิดดูคำศัพท์</b><span id="lookupMini">0 ครั้ง</span></div>
+          </div>
+        </aside>
+
+        <main class="card storyCard">
+          <div class="storyTools">
+            <div>
+              <div class="panelTitle" style="margin-bottom:4px">At the Café: Thai → English Dialogue ☕</div>
+              <div class="scoreMini">18 บรรทัด • 42 ช่อง • ฟังเสียงเป็นตัวช่วย • ไม่ฟังแล้วถูกได้ 2 คะแนน</div>
+            </div>
+            <div class="row" style="justify-content:flex-end">
+              <button class="btn gold" onclick="toggleThaiHint()">🇹🇭 ดูไทยรวม</button>
+              <button class="btn ghost" onclick="removeLastToken()">⌫ ลบคำท้าย</button>
+              <button class="btn ghost" onclick="clearActiveBlank()">🧹 ล้างช่องนี้</button>
+              <button class="btn" onclick="checkAnswers()">ตรวจคำตอบ ✓</button>
+            </div>
+          </div>
+
+          <div id="hintBox" class="hintBox"></div>
+          <div id="statsBox" class="statsBox"></div>
+
+          <div class="storyScroller" id="storyScroller">
+            <div id="storyText" class="storyText"></div>
+
+            <div id="resultBox" class="hide">
+              <div class="resultHero">
+                <div id="resultHeadline" class="bigScore">คะแนน 0/84</div>
+                <div id="resultSub" class="tagline" style="margin-top:8px"></div>
+              </div>
+
+              <div id="certificate" class="certificate">
+                <div class="certTitle" id="certTitle">🏆 RESULT REPORT</div>
+                <div class="certGrid">
+                  <div class="certBox"><span>Student</span><div id="certName">-</div></div>
+                  <div class="certBox"><span>Score</span><div id="certScore">0/84</div></div>
+                  <div class="certBox"><span>Status</span><div id="certStatus">-</div></div>
+                </div>
+                <div class="small center" id="certDate"></div>
+              </div>
+
+              <div id="reviewList" class="reviewList"></div>
+              <div class="row" style="margin-top:14px">
+                <button class="btn pink" onclick="speakAllCorrect()">🔊 อ่านเฉลยเต็มทั้งหมด</button>
+                <button class="btn gold" onclick="window.print()">📄 Print / Save as PDF</button>
+                <button class="btn" onclick="startRetryWithAudio()">🎧 เริ่มใหม่แบบใช้เสียงช่วยได้</button>
+                <button class="btn ghost" onclick="resetAnswers()">เริ่มใหม่แบบล้างตัวช่วย</button>
+                <button class="btn ghost" onclick="backHome()">⬅ กลับหน้าแรก</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="meaningBack" class="modalBack">
+    <div class="modal">
+      <div class="modalHead">
+        <div class="modalTitle" id="meaningTitle">word</div>
+        <div class="modalSub" id="meaningSub">คำชนิด / หมวด</div>
+      </div>
+      <div class="modalBody" id="meaningBody"></div>
+      <div class="modalFoot"><button class="btn ghost" onclick="closeMeaning()">ปิด</button></div>
+    </div>
+  </div>
+
+  <script>
+    const LINES = [
+      {id:1, speaker:"customer", thai:"สวัสดีตอนเช้า", parts:["Good ",{blank:1},"."]},
+      {id:2, speaker:"barista", thai:"สวัสดีตอนเช้า ยินดีต้อนรับสู่ Magic Café", parts:["Good ",{blank:2},"! ",{blank:3}," to Magic Café."]},
+      {id:3, speaker:"barista", thai:"คุณเคยมาที่นี่มาก่อนไหม", parts:["Have you ",{blank:4}," ",{blank:5}," here before?"]},
+      {id:4, speaker:"customer", thai:"ไม่ค่ะ/ครับ นี่เป็นครั้งแรกของฉัน", parts:["No, this is my ",{blank:6}," ",{blank:7}," here."]},
+      {id:5, speaker:"barista", thai:"คุณมีบัตรสมาชิกไหม", parts:["Do you ",{blank:8}," a ",{blank:9}," card?"]},
+      {id:6, speaker:"customer", thai:"ยังไม่มีค่ะ/ครับ แต่ฉันอยากสะสมแต้ม", parts:["Not yet, but I would like to ",{blank:10}," ",{blank:11},"."]},
+      {id:7, speaker:"barista", thai:"คุณสามารถสะสมแต้มได้ทุกครั้งที่ซื้อของ", parts:["You can ",{blank:12}," ",{blank:13}," every time you ",{blank:14}," something."]},
+      {id:8, speaker:"barista", thai:"วันนี้เรามีโปรโมชั่นพิเศษ ซื้อหนึ่งแถมหนึ่ง", parts:["Today we ",{blank:15}," a ",{blank:16}," ",{blank:17},". Buy ",{blank:18},", get one ",{blank:19},"."]},
+      {id:9, speaker:"customer", thai:"ฟังดูดีมาก วันนี้ฉันต้องการสั่งลาเต้เย็น", parts:["That ",{blank:20}," really ",{blank:21},". I would like to ",{blank:22}," a ",{blank:23}," ",{blank:24},"."]},
+      {id:10, speaker:"barista", thai:"รับขนาดไหนดีครับ/ค่ะ", parts:[{blank:25}," size ",{blank:26}," you ",{blank:27},"?"]},
+      {id:11, speaker:"customer", thai:"ขนาดกลางค่ะ/ครับ และขอหวานนิดหน่อย", parts:[{blank:28},", please, and just a ",{blank:29}," ",{blank:30},"."]},
+      {id:12, speaker:"barista", thai:"รับอย่างอื่นเพิ่มไหมครับ/ค่ะ", parts:["Would you like ",{blank:31}," ",{blank:32},"?"]},
+      {id:13, speaker:"customer", thai:"ฉันขอเค้กช็อกโกแลตหนึ่งชิ้นด้วยได้ไหม", parts:["Can I ",{blank:33}," a ",{blank:34}," of chocolate ",{blank:35}," too?"]},
+      {id:14, speaker:"barista", thai:"ทานที่ร้านหรือกลับบ้าน", parts:["Is it ",{blank:36}," here or to ",{blank:37},"?"]},
+      {id:15, speaker:"customer", thai:"ทานที่ร้านค่ะ/ครับ", parts:["For ",{blank:38},", please."]},
+      {id:16, speaker:"barista", thai:"ทั้งหมด 135 บาท", parts:["That will ",{blank:39}," 135 baht."]},
+      {id:17, speaker:"customer", thai:"ฉันจ่ายเงินสดได้ไหม", parts:["Can I pay by ",{blank:40},"?"]},
+      {id:18, speaker:"barista", thai:"ได้เลยค่ะ/ครับ คุณได้ 10 แต้มวันนี้ และออเดอร์จะพร้อมเร็ว ๆ นี้", parts:["Sure. You get 10 ",{blank:41}," today. Your order will be ready ",{blank:42},"."]}
+    ];
+
+    const BLANKS = [
+      {id:1, correct:"morning", explain:"Good morning = สวัสดีตอนเช้า", lineId:1},
+      {id:2, correct:"morning", explain:"Good morning!", lineId:2},
+      {id:3, correct:"Welcome", explain:"Welcome to Magic Café.", lineId:2},
+      {id:4, correct:"ever", explain:"Have you ever...? = คุณเคย...ไหม", lineId:3},
+      {id:5, correct:"been", explain:"been here before = เคยมาที่นี่มาก่อน", lineId:3},
+      {id:6, correct:"first", explain:"first time = ครั้งแรก", lineId:4},
+      {id:7, correct:"time", explain:"my first time here", lineId:4},
+      {id:8, correct:"have", explain:"Do you have...? = คุณมี...ไหม", lineId:5},
+      {id:9, correct:"member", explain:"member card = บัตรสมาชิก", lineId:5},
+      {id:10, correct:"collect", explain:"collect points = สะสมแต้ม", lineId:6},
+      {id:11, correct:"points", explain:"points = แต้ม", lineId:6},
+      {id:12, correct:"collect", explain:"You can collect...", lineId:7},
+      {id:13, correct:"points", explain:"collect points", lineId:7},
+      {id:14, correct:"buy", explain:"buy something = ซื้อของ", lineId:7},
+      {id:15, correct:"have", explain:"Today we have...", lineId:8},
+      {id:16, correct:"special", explain:"special promotion = โปรโมชั่นพิเศษ", lineId:8},
+      {id:17, correct:"promotion", explain:"promotion = โปรโมชั่น", lineId:8},
+      {id:18, correct:"one", explain:"Buy one, get one free", lineId:8},
+      {id:19, correct:"free", explain:"get one free = แถมหนึ่ง", lineId:8},
+      {id:20, correct:"sounds", explain:"That sounds...", lineId:9},
+      {id:21, correct:"great", explain:"sounds really great = ฟังดูดีมาก", lineId:9},
+      {id:22, correct:"order", explain:"would like to order = ต้องการสั่ง", lineId:9},
+      {id:23, correct:"ice", explain:"ice latte: ฝึกเรียง ice ก่อน latte ตามโจทย์", lineId:9},
+      {id:24, correct:"latte", explain:"ice latte = ลาเต้เย็น", lineId:9},
+      {id:25, correct:"What", explain:"What size...? = ขนาดไหนดี", lineId:10},
+      {id:26, correct:"would", explain:"would you like", lineId:10},
+      {id:27, correct:"like", explain:"What size would you like?", lineId:10},
+      {id:28, correct:"Medium", explain:"Medium, please.", lineId:11},
+      {id:29, correct:"little", explain:"a little = นิดหน่อย", lineId:11},
+      {id:30, correct:"sweet", explain:"a little sweet = หวานนิดหน่อย", lineId:11},
+      {id:31, correct:"anything", explain:"anything else = อย่างอื่นเพิ่ม", lineId:12},
+      {id:32, correct:"else", explain:"Would you like anything else?", lineId:12},
+      {id:33, correct:"get", explain:"Can I get...? = ขอ...ได้ไหม", lineId:13},
+      {id:34, correct:"slice", explain:"a slice of cake = เค้กหนึ่งชิ้น", lineId:13},
+      {id:35, correct:"cake", explain:"chocolate cake", lineId:13},
+      {id:36, correct:"for", explain:"for here = ทานที่ร้าน", lineId:14},
+      {id:37, correct:"go", explain:"to go = กลับบ้าน", lineId:14},
+      {id:38, correct:"here", explain:"For here, please.", lineId:15},
+      {id:39, correct:"be", explain:"That will be 135 baht.", lineId:16},
+      {id:40, correct:"cash", explain:"pay by cash = จ่ายเงินสด", lineId:17},
+      {id:41, correct:"points", explain:"You get 10 points today.", lineId:18},
+      {id:42, correct:"soon", explain:"ready soon = พร้อมเร็ว ๆ นี้", lineId:18}
+    ];
+
+    const WORD_GROUPS = {
+      question: ["What","would","like","ever"],
+      aux: ["Do","have","will","be","been","would"],
+      verb: ["Welcome","collect","buy","order","get","pay","sounds"],
+      noun: ["morning","member","card","points","promotion","latte","size","slice","cake","cash","time"],
+      adjadv: ["first","special","one","free","great","ice","Medium","little","sweet","ready","soon"],
+      other: ["anything","else","for","go","here","today","before"]
+    };
+
+    const GROUP_LABELS = {
+      question: "🟦 คำถาม / Question Words",
+      aux: "🔵 กริยาช่วย / Verb to be",
+      verb: "🟢 กริยาแท้",
+      noun: "🟡 คำนาม",
+      adjadv: "🟣 คุณศัพท์ / วิเศษณ์",
+      other: "⚪ อื่น ๆ"
+    };
+
+    const DICTIONARY = {
+      "What":{type:"question word",meaning:"อะไร / แบบไหน",tip:"What size would you like?"},
+      "would":{type:"auxiliary",meaning:"จะ / อยากจะ",tip:"would like = อยากได้"},
+      "like":{type:"verb",meaning:"ชอบ / ต้องการ",tip:"would like"},
+      "ever":{type:"adverb",meaning:"เคย",tip:"Have you ever...?"},
+      "Do":{type:"auxiliary",meaning:"ใช้สร้างคำถาม",tip:"Do you have...?"},
+      "have":{type:"verb/auxiliary",meaning:"มี",tip:"have a member card"},
+      "will":{type:"auxiliary",meaning:"จะ",tip:"will be ready"},
+      "be":{type:"be verb",meaning:"เป็น / อยู่ / คือ",tip:"That will be..."},
+      "been":{type:"verb V3",meaning:"เคยอยู่/เคยมา",tip:"Have you ever been here?"},
+      "Welcome":{type:"expression",meaning:"ยินดีต้อนรับ",tip:"Welcome to Magic Café"},
+      "collect":{type:"verb",meaning:"สะสม",tip:"collect points"},
+      "buy":{type:"verb",meaning:"ซื้อ",tip:"buy something"},
+      "order":{type:"verb/noun",meaning:"สั่ง / ออเดอร์",tip:"would like to order"},
+      "get":{type:"verb",meaning:"ได้รับ / ขอ",tip:"Can I get...?"},
+      "pay":{type:"verb",meaning:"จ่ายเงิน",tip:"pay by cash"},
+      "sounds":{type:"verb",meaning:"ฟังดู",tip:"That sounds great"},
+      "morning":{type:"noun",meaning:"ตอนเช้า",tip:"Good morning"},
+      "member":{type:"noun/adjective",meaning:"สมาชิก",tip:"member card"},
+      "card":{type:"noun",meaning:"บัตร",tip:"member card"},
+      "points":{type:"noun",meaning:"แต้ม",tip:"collect points"},
+      "promotion":{type:"noun",meaning:"โปรโมชั่น",tip:"special promotion"},
+      "latte":{type:"noun",meaning:"ลาเต้",tip:"ice latte"},
+      "size":{type:"noun",meaning:"ขนาด",tip:"What size...?"},
+      "slice":{type:"noun",meaning:"ชิ้น",tip:"a slice of cake"},
+      "cake":{type:"noun",meaning:"เค้ก",tip:"chocolate cake"},
+      "cash":{type:"noun",meaning:"เงินสด",tip:"pay by cash"},
+      "time":{type:"noun",meaning:"ครั้ง / เวลา",tip:"first time"},
+      "first":{type:"adjective",meaning:"แรก",tip:"first time"},
+      "special":{type:"adjective",meaning:"พิเศษ",tip:"special promotion"},
+      "one":{type:"number",meaning:"หนึ่ง",tip:"Buy one"},
+      "free":{type:"adjective",meaning:"ฟรี",tip:"get one free"},
+      "great":{type:"adjective",meaning:"ดีมาก",tip:"sounds great"},
+      "ice":{type:"adjective/noun",meaning:"เย็น / น้ำแข็ง",tip:"ice latte ตามโครงที่ฝึก"},
+      "Medium":{type:"adjective",meaning:"ขนาดกลาง",tip:"Medium, please"},
+      "little":{type:"adjective/adverb",meaning:"เล็กน้อย",tip:"a little sweet"},
+      "sweet":{type:"adjective",meaning:"หวาน",tip:"a little sweet"},
+      "ready":{type:"adjective",meaning:"พร้อม",tip:"ready soon"},
+      "soon":{type:"adverb",meaning:"เร็ว ๆ นี้",tip:"ready soon"},
+      "anything":{type:"pronoun",meaning:"อะไรบ้าง",tip:"anything else"},
+      "else":{type:"adverb",meaning:"อื่นอีก",tip:"anything else"},
+      "for":{type:"preposition",meaning:"สำหรับ",tip:"for here"},
+      "go":{type:"verb",meaning:"ไป",tip:"to go"},
+      "here":{type:"adverb",meaning:"ที่นี่",tip:"for here"},
+      "today":{type:"time word",meaning:"วันนี้",tip:"today"},
+      "before":{type:"time word",meaning:"มาก่อน",tip:"here before"}
+    };
+
+    const THAI_HINT = LINES.map(l => `${l.id}. ${l.thai}`).join("<br>");
+
+    const answers = {};
+    const checkedState = {};
+    const lineMistakes = {};
+    const unlockedFullSentence = {};
+    let activeBlank = null;
+    let thaiShown = false;
+    let lookupCount = 0;
+    let lastScore = 0;
+    let lastStatus = "ยังไม่ได้ตรวจ";
+    let attemptCount = 0;
+    let audioMode = "hint"; // hint | review
+    const audioUsedLines = {};
+    const lookedWords = new Set();
+    let pressTimer = null;
+
+    const $ = id => document.getElementById(id);
+
+    function getWordCategory(word){
+      for(const [key,words] of Object.entries(WORD_GROUPS)){
+        if(words.includes(word)) return key;
+      }
+      return 'other';
+    }
+
+    function getSpeakerName(speaker){
+      return speaker === "barista" ? "Barista" : "Customer";
+    }
+
+    function getFullSentence(lineId, preferCorrect=true){
+      const line = LINES.find(l=>l.id===lineId);
+      if(!line) return "";
+      let text = "";
+      line.parts.forEach(p=>{
+        if(typeof p === "string") text += p;
+        else{
+          const b = BLANKS.find(x=>x.id===p.blank);
+          text += preferCorrect ? b.correct : (answers[p.blank] || b.correct);
+        }
+      });
+      return text.replace(/\s+/g," ").trim();
+    }
+
+    function speak(text){
+      if(!("speechSynthesis" in window)){
+        toast("เครื่องนี้ไม่รองรับเสียงอ่าน");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      utter.rate = 0.88;
+      utter.pitch = 1.04;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function speakLine(lineId){
+      speak(getFullSentence(lineId, true));
+    }
+
+    function speakAllCorrect(){
+      const text = LINES.map(l => `${getSpeakerName(l.speaker)}: ${getFullSentence(l.id, true)}`).join(" ");
+      speak(text);
+    }
+
+    function startGame(){
+      $('who').textContent = ($('playerName').value || '').trim() || 'ผู้เล่น';
+      $('screenLogin').classList.add('hide');
+      $('screenGame').classList.remove('hide');
+      $('hintBox').innerHTML = THAI_HINT;
+      thaiShown = false;
+      $('hintBox').style.display = 'none';
+      resetAnswers(false);
+    }
+
+    function backHome(){
+      window.speechSynthesis && window.speechSynthesis.cancel();
+      $('screenGame').classList.add('hide');
+      $('screenLogin').classList.remove('hide');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function resetAnswers(showToastMsg=true){
+      BLANKS.forEach(b=>{answers[b.id]=''; delete checkedState[b.id];});
+      Object.keys(lineMistakes).forEach(k=>delete lineMistakes[k]);
+      Object.keys(unlockedFullSentence).forEach(k=>delete unlockedFullSentence[k]);
+      activeBlank = 1;
+      lookupCount = 0;
+      lastScore = 0;
+      lastStatus = "ยังไม่ได้ตรวจ";
+      attemptCount = 0;
+      audioMode = "hint";
+      Object.keys(audioUsedLines).forEach(k=>delete audioUsedLines[k]);
+      lookedWords.clear();
+      renderStory();
+      renderWordBank();
+      updateStats();
+      $('statsBox').style.display = 'none';
+      $('resultBox').classList.add('hide');
+      $('certificate').classList.remove('show');
+      if(showToastMsg) toast('เริ่มใหม่แล้ว ✨');
+    }
+
+    function renderWordBank(){
+      const bank = $('wordBank');
+      bank.innerHTML = '';
+      const usedCounts = {};
+      Object.values(answers).forEach(v=>{
+        if(v){ usedCounts[v] = (usedCounts[v] || 0) + 1; }
+      });
+
+      Object.keys(WORD_GROUPS).forEach(groupKey=>{
+        const groupWrap = document.createElement('div');
+        groupWrap.className = 'groupBlock';
+
+        const title = document.createElement('div');
+        title.className = 'groupTitle';
+        title.textContent = GROUP_LABELS[groupKey];
+        groupWrap.appendChild(title);
+
+        const row = document.createElement('div');
+        row.className = 'groupRow';
+
+        [...WORD_GROUPS[groupKey]].sort((a,b)=>a.localeCompare(b)).forEach(word=>{
+          const btn = document.createElement('button');
+          const used = usedCounts[word] || 0;
+          btn.className = 'wordBtn' + (lookedWords.has(word) ? ' looked' : '') + (used ? ' used' : '');
+          btn.textContent = used ? `${word} ×${used}` : word;
+          btn.dataset.word = word;
+          btn.dataset.group = groupKey;
+          btn.onclick = (e)=>selectWord(word,btn,e);
+          btn.oncontextmenu = (e)=>{e.preventDefault();openMeaning(word);};
+          btn.addEventListener('touchstart',()=>{pressTimer=setTimeout(()=>openMeaning(word),450);},{passive:true});
+          btn.addEventListener('touchend',()=>clearTimeout(pressTimer));
+          btn.addEventListener('touchmove',()=>clearTimeout(pressTimer));
+          row.appendChild(btn);
+        });
+
+        groupWrap.appendChild(row);
+        bank.appendChild(groupWrap);
+      });
+    }
+
+    function renderStory(){
+      const box = $('storyText');
+      box.innerHTML = '';
+      LINES.forEach(line=>{
+        const card = document.createElement('div');
+        card.className = `dialogueLine ${line.speaker}Line` + (getActiveLineId() === line.id ? ' activeLine' : '');
+        card.id = 'line-' + line.id;
+
+        const top = document.createElement('div');
+        top.className = 'lineTop';
+
+        const thaiLabel = document.createElement('div');
+        thaiLabel.className = 'thaiLabel';
+        thaiLabel.textContent = '🇹🇭 โจทย์ภาษาไทย';
+        top.appendChild(thaiLabel);
+
+        const tools = document.createElement('div');
+        tools.className = 'row';
+        tools.style.justifyContent = 'flex-end';
+
+        const audioBtn = document.createElement('button');
+        audioBtn.className = audioUsedLines[line.id] ? 'btn gold' : 'btn pink';
+        audioBtn.style.padding = '8px 11px';
+        audioBtn.textContent = audioUsedLines[line.id] ? '🎧 Used Hint' : '🎧 Listen Hint';
+        audioBtn.title = audioUsedLines[line.id] ? 'บรรทัดนี้ใช้เสียงช่วยแล้ว: ถ้าตอบถูกจะได้ 1 คะแนน/คำ' : 'กดฟังเสียงช่วยได้: ถ้าตอบถูกจะได้ 1 คะแนน/คำ';
+        audioBtn.onclick = ()=>{
+          audioUsedLines[line.id] = true;
+          speakLine(line.id);
+          renderStory();
+          renderWordBank();
+          updateStats();
+          toast('ใช้เสียงช่วยแล้ว: บรรทัดนี้ตอบถูกได้ 1 คะแนน/คำ 🎧');
+        };
+        tools.appendChild(audioBtn);
+
+        const showBtn = document.createElement('button');
+        showBtn.className = unlockedFullSentence[line.id] ? 'btn gold' : 'btn ghost';
+        showBtn.style.padding = '8px 11px';
+        showBtn.textContent = unlockedFullSentence[line.id] ? '👀 Show Full Sentence' : '🔒 Full Sentence';
+        showBtn.onclick = ()=>{
+          if(!unlockedFullSentence[line.id]){
+            toast('บรรทัดนี้ต้องผิดครบ 2 ครั้งก่อนถึงจะปลดล็อกนะ 🙂');
+            return;
+          }
+          const el = $('full-' + line.id);
+          el.classList.toggle('show');
+        };
+        tools.appendChild(showBtn);
+        top.appendChild(tools);
+        card.appendChild(top);
+
+        const thaiBox = document.createElement('div');
+        thaiBox.className = 'thaiBox';
+        thaiBox.textContent = line.thai;
+        card.appendChild(thaiBox);
+
+        const eng = document.createElement('div');
+        eng.className = 'engLine';
+        const speaker = document.createElement('span');
+        speaker.className = 'speaker ' + line.speaker;
+        speaker.textContent = getSpeakerName(line.speaker);
+        eng.appendChild(speaker);
+
+        line.parts.forEach(part=>{
+          if(typeof part === 'string'){
+            eng.appendChild(document.createTextNode(part));
+            return;
+          }
+          const blankId = part.blank;
+          const state = checkedState[blankId] || '';
+          const blank = document.createElement('span');
+          blank.className = 'blank' + (activeBlank===blankId ? ' active':'') + (state ? ' '+state : '');
+          blank.onclick = ()=>setActiveBlank(blankId);
+          blank.id = 'blank-' + blankId;
+
+          const tokenWrap = document.createElement('span');
+          tokenWrap.className = 'tokenWrap';
+          const userToken = answers[blankId] || '';
+          if(!userToken){
+            const ph = document.createElement('span');
+            ph.className = 'placeholder';
+            ph.textContent = 'เติมคำ';
+            tokenWrap.appendChild(ph);
+          }else{
+            const mini = document.createElement('span');
+            mini.className = 'miniToken';
+            mini.textContent = userToken;
+            tokenWrap.appendChild(mini);
+          }
+          blank.appendChild(tokenWrap);
+
+          const num = document.createElement('span');
+          num.className = 'blankNum';
+          num.textContent = '#' + blankId;
+          blank.appendChild(num);
+
+          if(state){
+            const mark = document.createElement('span');
+            mark.className = 'blankMark';
+            mark.textContent = state === 'correct' ? '✓' : '✗';
+            blank.appendChild(mark);
+          }
+
+          eng.appendChild(blank);
+        });
+
+        card.appendChild(eng);
+
+        const mistake = document.createElement('div');
+        mistake.className = 'mistakeBadge' + ((lineMistakes[line.id] || 0) > 0 ? ' show' : '');
+        mistake.textContent = `พลาดบรรทัดนี้ ${lineMistakes[line.id] || 0}/2 ครั้ง`;
+        card.appendChild(mistake);
+
+        const full = document.createElement('div');
+        full.className = 'fullSentence';
+        full.id = 'full-' + line.id;
+        full.innerHTML = `<b>Full Sentence:</b> ${escapeHtml(getFullSentence(line.id, true))}`;
+        card.appendChild(full);
+
+        box.appendChild(card);
+      });
+    }
+
+    function getActiveLineId(){
+      const item = BLANKS.find(b=>b.id===activeBlank);
+      return item ? item.lineId : null;
+    }
+
+    function setActiveBlank(id){
+      activeBlank = id;
+      renderStory();
+      renderWordBank();
+      updateStats();
+      scrollLineIntoView(id);
+    }
+
+    function scrollLineIntoView(blankId){
+      const lineId = (BLANKS.find(b=>b.id===blankId)||{}).lineId;
+      const el = $('line-' + lineId);
+      if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); }
+    }
+
+    function updateStats(){
+      const filled = BLANKS.filter(b => (answers[b.id]||'').trim().length > 0).length;
+      $('fillCount').textContent = `${filled}/${BLANKS.length} ช่อง`;
+      $('activeInfo').textContent = activeBlank ? `ช่อง #${activeBlank}` : 'ยังไม่ได้เลือก';
+      $('lookupMini').textContent = `${lookupCount} ครั้ง`;
+    }
+
+    function selectWord(word,btn){
+      if(!activeBlank){toast('เลือกช่องว่างก่อนนะ 🙂');return;}
+      const currentBlank = activeBlank;
+      const expected = BLANKS.find(b=>b.id===currentBlank);
+      const selectedCategory = getWordCategory(word);
+      const expectedCategory = expected ? getWordCategory(expected.correct) : 'other';
+
+      answers[currentBlank] = word;
+      delete checkedState[currentBlank];
+
+      btn.classList.remove('flash');
+      void btn.offsetWidth;
+      btn.classList.add('flash');
+      animateToken(word,btn,$('blank-' + currentBlank));
+
+      renderStory();
+      if(selectedCategory === expectedCategory){
+        requestAnimationFrame(()=>showCategoryGlow(currentBlank));
+      }
+
+      const next = BLANKS.find(b=>b.id===currentBlank+1);
+      if(next) activeBlank = next.id;
+      renderStory();
+      renderWordBank();
+      updateStats();
+    }
+
+    function showCategoryGlow(blankId){
+      const blank = $('blank-' + blankId);
+      if(!blank)return;
+      blank.classList.remove('groupGlow');
+      void blank.offsetWidth;
+      blank.classList.add('groupGlow');
+      setTimeout(()=>blank.classList.remove('groupGlow'),720);
+    }
+
+    function animateToken(word,fromEl,toEl){
+      if(!fromEl||!toEl)return;
+      const f = fromEl.getBoundingClientRect();
+      const t = toEl.getBoundingClientRect();
+      const fly = document.createElement('div');
+      fly.className = 'flyingToken';
+      fly.textContent = word;
+      fly.style.setProperty('--sx',f.left + 'px');
+      fly.style.setProperty('--sy',f.top + 'px');
+      fly.style.setProperty('--tx',(t.left - f.left + 12) + 'px');
+      fly.style.setProperty('--ty',(t.top - f.top + 8) + 'px');
+      document.body.appendChild(fly);
+      setTimeout(()=>fly.remove(),620);
+    }
+
+    function removeLastToken(){
+      if(!activeBlank){toast('ยังไม่ได้เลือกช่อง');return;}
+      if(!answers[activeBlank]){toast('ช่องนี้ยังไม่มีคำให้ลบ');return;}
+      answers[activeBlank] = '';
+      delete checkedState[activeBlank];
+      renderStory();
+      renderWordBank();
+      updateStats();
+    }
+
+    function clearActiveBlank(){
+      if(!activeBlank){toast('ยังไม่ได้เลือกช่อง');return;}
+      answers[activeBlank] = '';
+      delete checkedState[activeBlank];
+      renderStory();
+      renderWordBank();
+      updateStats();
+      toast(`ล้างช่อง #${activeBlank} แล้ว`);
+    }
+
+    function toggleThaiHint(){
+      thaiShown = !thaiShown;
+      $('hintBox').style.display = thaiShown ? 'block' : 'none';
+    }
+
+    function openMeaning(word){
+      lookupCount++;
+      lookedWords.add(word);
+      const entry = DICTIONARY[word] || {type:'word',meaning:'ยังไม่ได้ใส่คำอธิบาย',tip:'ดูจากบริบทของบทสนทนา'};
+      $('meaningTitle').textContent = word;
+      $('meaningSub').textContent = entry.type;
+      $('meaningBody').innerHTML = `<div><b>ความหมาย:</b> ${escapeHtml(entry.meaning)}</div><div style="margin-top:10px"><b>คำใบ้:</b> ${escapeHtml(entry.tip)}</div>`;
+      $('meaningBack').style.display = 'flex';
+      renderWordBank();
+      updateStats();
+    }
+
+    function closeMeaning(){ $('meaningBack').style.display = 'none'; }
+
+
+    function startRetryWithAudio(){
+      BLANKS.forEach(b=>{answers[b.id]=''; delete checkedState[b.id];});
+      Object.keys(audioUsedLines).forEach(k=>delete audioUsedLines[k]);
+      activeBlank = 1;
+      audioMode = "hint";
+      $('resultBox').classList.add('hide');
+      $('certificate').classList.remove('show');
+      renderStory();
+      renderWordBank();
+      updateStats();
+      toast('เริ่มรอบใหม่: ฟังเสียงเป็นตัวช่วยได้ คะแนนจะลดลงเฉพาะบรรทัดที่ใช้เสียง 🎧');
+      $('storyText').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function checkAnswers(){
+      let allTouched = true;
+      BLANKS.forEach(b=>{if(!(answers[b.id]||'').trim()) allTouched = false;});
+      if(!allTouched){toast('ยังเติมไม่ครบทุกช่องนะ ✍️');return;}
+
+      attemptCount++;
+      let score = 0;
+      let pureCorrect = 0;
+      let hintCorrect = 0;
+      let wrongCount = 0;
+      const review = $('reviewList');
+      review.innerHTML = '';
+
+      const lineHadWrong = {};
+      BLANKS.forEach(b=>{
+        const user = (answers[b.id] || '').trim();
+        const ok = user === b.correct;
+        checkedState[b.id] = ok ? 'correct' : 'wrong';
+        if(ok){
+          if(audioUsedLines[b.lineId]){
+            score += 1;
+            hintCorrect++;
+          }else{
+            score += 2;
+            pureCorrect++;
+          }
+        }else{
+          wrongCount++;
+          lineHadWrong[b.lineId] = true;
+        }
+      });
+
+      Object.keys(lineHadWrong).forEach(lineId=>{
+        lineMistakes[lineId] = (lineMistakes[lineId] || 0) + 1;
+        if(lineMistakes[lineId] >= 2) unlockedFullSentence[lineId] = true;
+      });
+
+      BLANKS.forEach(b=>{
+        const user = (answers[b.id] || '').trim();
+        const ok = user === b.correct;
+        const line = LINES.find(l=>l.id===b.lineId);
+        const usedAudio = !!audioUsedLines[b.lineId];
+        const pointText = ok ? (usedAudio ? '+1 คะแนน (ใช้เสียงช่วย)' : '+2 คะแนน (คิดเอง)') : '0 คะแนน';
+
+        const item = document.createElement('div');
+        item.className = 'reviewItem';
+        item.innerHTML = `
+          <div class="reviewTop">
+            <b>ช่อง #${b.id}: <span style="color:${ok ? 'var(--ok)' : 'var(--bad)'}">${escapeHtml(user)||'-'}</span></b>
+            <span class="pill">${ok ? 'ถูก ✔ ' + pointText : 'ผิด ✘ 0 คะแนน'}</span>
+          </div>
+          <div class="small"><b>โจทย์ไทย:</b> ${escapeHtml(line.thai)}</div>
+          ${ok ? '' : `<div class="small"><b>เฉลย:</b> ${escapeHtml(b.correct)}</div>`}
+          <div class="small"><b>สถานะเสียง:</b> ${usedAudio ? 'ใช้เสียงช่วยในบรรทัดนี้ 🎧' : 'ไม่ได้ใช้เสียงช่วยในบรรทัดนี้ ⭐'}</div>
+          <div class="small">${escapeHtml(b.explain)}</div>
+          <div class="small"><b>Full sentence:</b> ${escapeHtml(getFullSentence(b.lineId, true))}</div>
+        `;
+        review.appendChild(item);
+      });
+
+      lastScore = score;
+      const maxScore = BLANKS.length * 2;
+      const passScore = Math.ceil(maxScore * 0.8);
+      let status = "❌ TRY AGAIN";
+      let feedback = "สู้ต่อได้อีกนิดนะ ✨";
+      if(score === maxScore){
+        status = "⭐ PERFECT";
+        feedback = "สุดยอดมาก! ถูกครบแบบไม่ใช้เสียงช่วยเลย 🎉";
+      }else if(score >= passScore){
+        status = "🏆 PASS";
+        feedback = "ผ่านภารกิจแล้ว เก่งมาก ใช้ตัวช่วยได้อย่างฉลาด 🌟";
+      }else if(score >= Math.ceil(maxScore * 0.6)){
+        feedback = "ดีมากแล้ว เหลือเกลาคำและลำดับคำอีกนิด 💪";
+      }
+      lastStatus = status;
+      audioMode = "review";
+
+      renderStory();
+      updateStats();
+
+      const pct = Math.round(score / maxScore * 100);
+      $('resultHeadline').textContent = `คะแนน ${score}/${maxScore} (${pct}%)`;
+      $('resultSub').textContent = `${status} — ${feedback}`;
+
+      const player = ($('playerName').value || '').trim() || 'ผู้เล่น';
+      const now = new Date();
+      $('certName').textContent = player;
+      $('certScore').textContent = `${score}/${maxScore}`;
+      $('certStatus').textContent = status;
+      $('certDate').textContent = `Date: ${now.toLocaleDateString()} • Kru Pai Classroom`;
+      $('certTitle').textContent = score === maxScore ? "⭐ PERFECT CAFÉ REPORT" : (score >= passScore ? "🏆 PASS CAFÉ REPORT" : "📄 PRACTICE CAFÉ REPORT");
+      $('certificate').classList.add('show');
+
+      const uniqueWords = lookedWords.size;
+      const usedAudioLineCount = Object.keys(audioUsedLines).length;
+      $('statsBox').style.display = 'block';
+      $('statsBox').innerHTML = `<b>📊 Smart Audio Hint Summary</b><br>
+      คะแนนล่าสุด <b>${score}/${maxScore}</b> • สถานะ <b>${status}</b><br>
+      ตอบถูกแบบไม่ใช้เสียง: <b>${pureCorrect}</b> คำ × 2 คะแนน<br>
+      ตอบถูกแบบใช้เสียงช่วย: <b>${hintCorrect}</b> คำ × 1 คะแนน<br>
+      ตอบผิด: <b>${wrongCount}</b> คำ<br>
+      ใช้เสียงช่วยทั้งหมด <b>${usedAudioLineCount}</b> บรรทัด<br>
+      กดดูความหมายทั้งหมด <b>${lookupCount}</b> ครั้ง • คำที่เปิดดูไม่ซ้ำ <b>${uniqueWords}</b> คำ<br><br>
+      <b>Audio Hint Rule:</b> ไม่ใช้เสียงแล้วถูก = 2 คะแนน/คำ • ใช้เสียงแล้วถูก = 1 คะแนน/คำ<br>
+      <b>PDF:</b> กดปุ่ม Print / Save as PDF เพื่อส่งผลให้ครูได้`;
+
+      $('resultBox').classList.remove('hide');
+      $('resultBox').scrollIntoView({behavior:'smooth',block:'start'});
+
+      setTimeout(()=>{
+        if(score >= passScore) speak(`${status}. Your score is ${score} out of ${maxScore}. Great job!`);
+        else speak(`Your score is ${score} out of ${maxScore}. Try again.`);
+      }, 350);
+    }
+
+    function escapeHtml(s){
+      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+    function toast(msg){
+      const t = $('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.classList.remove('show'),1400);
+    }
+
+    $('meaningBack').addEventListener('click',(e)=>{if(e.target === $('meaningBack')) closeMeaning();});
+    BLANKS.forEach(b=>answers[b.id]='');
+    renderWordBank();
+  </script>
+  <div class="stickerFloat">☕ 🧋 🍰 ✨</div>
+</body>
+</html>
